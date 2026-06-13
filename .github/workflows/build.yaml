@@ -53,4 +53,4 @@ jobs:
         context: ./source-code
         file: ./source-code/Dockerfile
         push: true
-        tags: user/app:latest
+        tags: silversoul007/dice-app:1.1
