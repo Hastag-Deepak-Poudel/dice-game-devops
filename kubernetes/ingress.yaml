@@ -2,13 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
+  namespace: my-namespace
 spec:
   ingressClassName: nginx
   rules:
   - host: myapp.com
     http:
       paths:
-      # Frontend (SPA)
       - path: /
         pathType: Prefix
         backend:
