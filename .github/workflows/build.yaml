@@ -2,6 +2,7 @@ name: Continuous Integration
 
 # Trigger the workflow on pushes or pull requests to the main branch
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
