@@ -1,0 +1,33 @@
+resource "aws_eks_node_group" "main" {
+  cluster_name    = aws_eks_cluster.main.name
+  node_group_name = "${var.cluster_name}-main"
+  node_role_arn   = aws_iam_role.node_group.arn
+  subnet_ids      = aws_subnet.private[*].id
+
+  scaling_config {
+    desired_size = 2
+    max_size     = 2
+    min_size     = 2
+  }
+
+  update_config {
+    max_unavailable_percentage = 33
+  }
+
+  instance_types = ["t3.small"]
+
+  disk_size = 20
+
+  labels = {
+    role = "general"
+  }
+
+  tags = {
+    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"             = "true"
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.node_policies
+  ]
+}

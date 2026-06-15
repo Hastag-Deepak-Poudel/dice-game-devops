@@ -22,3 +22,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Local .terraform directories (contains downloaded plugins and modules)
+**/.terraform/*
+
+# .tfstate files contain the current status of your managed infrastructure.
+# These can contain secrets and should be kept in a remote state backend, not Git.
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Exclude all variable files as they often contain sensitive secrets/credentials
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually used for local adjustments
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include microservices CLI configuration files
+.terraformrc
+terraform.rc
