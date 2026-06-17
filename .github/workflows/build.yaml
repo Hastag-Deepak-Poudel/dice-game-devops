@@ -100,6 +100,11 @@ jobs:
   docker_security_scan:
     runs-on: self-hosted
     needs: terraform_security_scan
+
+    permissions:
+      contents: read # Required to checkout and read repo files
+      security-events: write # Required to upload SARIF files to Security tab\
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
