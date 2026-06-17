@@ -72,6 +72,11 @@ jobs:
   terraform_security_scan:
     runs-on: self-hosted
     needs: Trivy-Scan
+
+    permissions:
+      contents: read # Required to checkout and read repo files
+      security-events: write # Required to upload SARIF files to Security tab
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -88,7 +93,7 @@ jobs:
         output: 'trivy-terraform-results.sarif'
 
     - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: 'trivy-terraform-results.sarif'
 
@@ -114,7 +119,7 @@ jobs:
         output: 'trivy-results.sarif'
 
     - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: 'trivy-results.sarif'
 
