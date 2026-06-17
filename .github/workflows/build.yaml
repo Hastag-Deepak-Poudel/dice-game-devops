@@ -117,6 +117,7 @@ jobs:
     - name: Run Trivy vulnerability scan
       uses: aquasecurity/trivy-action@v0.36.0
       with:
+        scan-type: 'image'
         image-ref: 'ttapp:latest'
         format: 'sarif'
         exit-code: 0
@@ -155,4 +156,6 @@ jobs:
         context: ./source-code
         file: ./source-code/Dockerfile
         push: true
-        tags: silversoul007/dice-app:1.1
+        tags: |
+          ${{ vars.DOCKERHUB_USERNAME }}/dice-app:1.1
+          ${{ vars.DOCKERHUB_USERNAME }}/ttapp:${{ github.sha }}
