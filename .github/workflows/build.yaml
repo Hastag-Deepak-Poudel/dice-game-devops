@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     # Run this job on an Ubuntu Linux runner
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     # Step 1: Check out the repository code onto the runner
@@ -31,7 +31,8 @@ jobs:
 
   Sonarqube:
     name: Build and analyze
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    needs: build-and-test
 
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -41,15 +42,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    # If you wish to fail your job when the Quality Gate is red, uncomment the
-    # following lines. This would typically be used to fail a deployment.
-    # - uses: SonarSource/sonarqube-quality-gate-action@cf038b0e0cdecfa9e56c198bbb7d21d751d62c3b # v1.2.0
-    #   timeout-minutes: 5
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   docker:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    name: Dockerizing the app
+    needs: Sonarqube
+
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
