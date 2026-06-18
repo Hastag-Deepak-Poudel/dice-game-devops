@@ -21,3 +21,39 @@ check if the ingress-nginx is working and run http://localhost/ in different ter
 check if ingress-nginx pod is working
 
 
+
+    if using eks then 
+
+6.  kubectl edit svc ingress-nginx-controller -n ingress-nginx
+
+    change from
+    --publish-service=localhost
+    to 
+    --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
+
+7. also install kyverno crd using helm
+
+    helm repo add kyverno https://kyverno.github.io/kyverno/
+    helm repo update
+    helm install kyverno kyverno/kyverno -n kyverno --create-namespace
+
+8. install argo cd
+
+    kubectl create namespace argocd
+
+    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+    kubectl get all -n argocd
+
+    kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8080:4434
+
+    kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+
+    echo "secret" | base64 decode
+
+
+
+
+
+
+
