@@ -16,7 +16,7 @@ spec:
       serviceAccountName: my-serviceaccount
       containers:
       - name: frontend
-        image: silversoul007/dice-app:latest
+        image: silversoul007/dice-app:1.1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
