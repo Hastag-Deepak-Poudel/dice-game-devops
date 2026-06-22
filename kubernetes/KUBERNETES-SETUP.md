@@ -45,7 +45,7 @@ check if ingress-nginx pod is working
 
     kubectl get all -n argocd
 
-    kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8080:4434
+    kubectl port-forward --address 0.0.0.0 svc/argocd-server -n argocd 8080:443
 
     kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
 
