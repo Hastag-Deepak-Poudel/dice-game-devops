@@ -53,7 +53,24 @@ check if ingress-nginx pod is working
 
 
 
+kubectl patch deployment ingress-nginx-controller \
+  -n ingress-nginx \
+  --type='json' \
+  -p='[
+    {
+      "op":"add",
+      "path":"/spec/template/spec/nodeSelector",
+      "value":{
+        "kubernetes.io/hostname":"kind-control-plane"
+      }
+    }
+  ]'
+
+
+  kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
+
+  kubectl get pods -n ingress-nginx -o wide
 
 
 
-
+kubectl port-forward   --address 0.0.0.0   -n my-namespace   svc/frontend-service 8081:80
