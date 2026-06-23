@@ -73,4 +73,15 @@ kubectl patch deployment ingress-nginx-controller \
 
 
 
-kubectl port-forward   --address 0.0.0.0   -n my-namespace   svc/frontend-service 8081:80
+kubectl port-forward --address 0.0.0.0 -n my-namespace svc/frontend-service 8081:80
+
+
+install HELM
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
+OR
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
