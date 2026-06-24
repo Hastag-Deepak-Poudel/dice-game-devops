@@ -104,7 +104,7 @@ To create a successful pipeline, we need to create a sonarqube_host and sonarqub
 To get the sonarqube_host and sonarqube_token, we must open the sonarqube app and get it from there. And follow the instruction from sonarqube app instruction.
 
 
-### create a config.yaml file and install the kind cluster to run in your ec2
+#### create a config.yaml file and install the kind cluster to run in your ec2
 
 ```bash
 # install kind in your ec2
