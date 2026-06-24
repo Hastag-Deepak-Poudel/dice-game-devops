@@ -256,6 +256,10 @@ terraform destroy
 # If you are using terraform to create resources
 ```
 
+
+To View all the logs files, login to the sonarqube app to check the quality of the code and to check the fs quality and image vunerability, navigate to security and quality of github repo.
+
+
 ## Contributing
 
 ## License
