@@ -99,12 +99,12 @@ In you github repo, add .github/workflows/<build_name>.yaml
 
 checkout the yaml file to understand what is going on the workflow.
 
-### To create a successful pipeline, we need to create a sonarqube_host and sonarqube_token  as well as DOCKER_USERNAME and DOCKER_PAT. To create, navigate to the setting in the repo, and go to secrets and variables and create them.
+To create a successful pipeline, we need to create a sonarqube_host and sonarqube_token  as well as DOCKER_USERNAME and DOCKER_PAT. To create, navigate to the setting in the repo, and go to secrets and variables and create them.
 
-### To get the sonarqube_host and sonarqube_token, we must open the sonarqube app and get it from there. And follow the instruction from sonarqube app instruction.
+To get the sonarqube_host and sonarqube_token, we must open the sonarqube app and get it from there. And follow the instruction from sonarqube app instruction.
 
 
-## create a config.yaml file and install the kind cluster to run in your ec2
+### create a config.yaml file and install the kind cluster to run in your ec2
 
 ```bash
 # install kind in your ec2
