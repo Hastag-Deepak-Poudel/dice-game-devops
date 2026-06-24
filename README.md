@@ -232,6 +232,30 @@ kubectl apply -f argocd.yaml
 Refresh the page in the browser of argocd.
 
 
+
+# If you are using eks cluster.
+```bash
+# Add your access and secret key from AWS IAM.
+aws configure
+
+# Verify your identity
+
+aws sts get-caller-identity
+
+# Add your cluster config in ~/.kube/config.file using
+
+aws eks update-kubeconfig --region 'your_region_name' --name 'your_eks_cluster_name'
+
+# For example, aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
+
+```
+
+## After using your cluster, make sure to terminate all your aws resources like ec2, and EKS cluster.
+```bash
+terraform destroy
+# If you are using terraform to create resources
+```
+
 ## Contributing
 
 ## License
