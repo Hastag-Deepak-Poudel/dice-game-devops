@@ -153,7 +153,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ```bash
 kubectl get pods -n ingress-nginx
 ```
-### By default the ingress-nginx controller is installed on worker node, so we need to install it on the control-plane so that we can route to the app.
+### If the ingress-nginx controller is installed on worker node, we need to install it on the control-plane so that we can route to the app. 
 
 ```bash
 kubectl patch deployment ingress-nginx-controller \
@@ -250,6 +250,21 @@ aws eks update-kubeconfig --region 'your_region_name' --name 'your_eks_cluster_n
 
 ```
 
+### Create eks cluster using terraform
+
+```bash
+# cd to terraform-template directory
+
+# Initialize the terraform
+terraform init
+
+# Plan the terraform IaC
+terraform plan
+
+# Apply the terraform 
+terraform apply --auto-approve
+```
+
 ## After using your cluster, make sure to terminate all your aws resources like ec2, and EKS cluster.
 ```bash
 terraform destroy
@@ -259,6 +274,46 @@ terraform destroy
 
 To View all the logs files, login to the sonarqube app to check the quality of the code and to check the fs quality and image vunerability, navigate to security and quality of github repo.
 
+
+## Install prometheus and Grafana to view the metrics of you kubernetes cluster and log them.
+
+Add the prometheus-community Helm repository and update your local list
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
+
+Create a dedicated namespace for your monitoring components:
+```bash
+kubectl create namespace monitoring
+```
+
+Install the kube-prometheus-stack chart into the monitoring namespace (you can replace my-prometheus with any release name you prefer)
+
+```bash
+helm install my-prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
+```
+
+Forward the Prometheus server to port 9090
+
+```bash
+kubectl port-forward svc/my-prometheus-prometheus --address 0.0.0.0 9090:9090 -n monitoring
+```
+
+###  Accessing the Dashboards
+
+Find the Grafana service name and forward it to port 3000
+
+```bash
+kubectl port-forward svc/my-prometheus-grafana --address 3000:80 -n monitoring
+```
+Default Username:  admin
+
+Default password: 
+```bash
+kubectl get secret my-prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode
+```
+Then import your prometheus metric and create a dashboard.
 
 ## Contributing
 
